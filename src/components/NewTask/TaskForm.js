@@ -18,7 +18,9 @@ const TaskForm = (props) => {
 
   useEffect(()=> {
     taskInputRef.current.focus()
-  }, [])
+    console.log("Task Input");
+    taskInputRef.current.value = ""
+  })
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
