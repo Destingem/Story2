@@ -1,10 +1,11 @@
-import { useRef } from 'react';
+import { useImperativeHandle, useRef } from 'react';
+import { useEffect } from 'react/cjs/react.development';
 
 import classes from './TaskForm.module.css';
 
 const TaskForm = (props) => {
   const taskInputRef = useRef();
-
+  const btn = useRef()
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -15,10 +16,14 @@ const TaskForm = (props) => {
     }
   };
 
+  useEffect(()=> {
+    taskInputRef.current.focus()
+  }, [])
+
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <input type='text' ref={taskInputRef} />
-      <button>{props.loading ? 'Sending...' : 'Add'}</button>
+      <button ref={btn}>{props.loading ? 'Sending...' : 'Add'}</button>
     </form>
   );
 };

@@ -12,7 +12,7 @@ function useFetch(props){
     }, []);
   
     const taskAddHandler = (task) => {
-      setTasks((prevTasks) => prevTasks.concat(task));
+      setTasks((prevTasks) => [task, ...prevTasks]);
     };
 
 
@@ -62,6 +62,7 @@ function useFetch(props){
             }
             console.log("Loaded Tasks " + loadedTasks);
             console.log(loadedTasks);
+            loadedTasks = loadedTasks.reverse()
             setTasks(loadedTasks);
         }
       
