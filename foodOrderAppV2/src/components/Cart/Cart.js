@@ -33,9 +33,39 @@ const Cart = (props) => {
       ))}
     </ul>
   );
-
+  function handleSubmit(props){
+    async function postData(props){
+      fetch("https://react-api-test-8bcb9-default-rtdb.europe-west1.firebasedatabase.app/orders.json", {
+        method: "POST",
+        body: JSON.stringify(props)
+      })
+    }
+    props.preventDefault()
+    postData(cartCtx.items)
+    console.log(cartCtx.items);
+  }
   return (
+    
     <Modal onClose={props.onClose}>
+    <form onSubmit={handleSubmit}>
+    <div className={classes.userInfo}>
+    <div>
+    <label HTMLfor="fName">First Name</label>
+    <input id='fName'></input>
+    </div>
+    <div>
+    <label HTMLfor="lName">Last Name</label>
+    <input id='lName'></input>
+    </div>
+    <div>
+    <label HTMLfor="email">Email </label>
+    <input id='email'></input>
+    </div>
+    <div>
+    <label htmlFor="phone">Phone</label>
+    <input id='phone'></input>
+    </div>
+    </div>
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
@@ -45,9 +75,11 @@ const Cart = (props) => {
         <button className={classes['button--alt']} onClick={props.onClose}>
           Close
         </button>
-        {hasItems && <button className={classes.button}>Order</button>}
+        {hasItems && <button className={classes.button} type="submit">Order</button>}
       </div>
+      </form>
     </Modal>
+    
   );
 };
 
