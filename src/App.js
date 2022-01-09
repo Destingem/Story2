@@ -8,6 +8,7 @@ function App() {
 
   const fetch = useFetch({method: "GET"})
   console.log(fetch);
+  console.log("Hello Wolrd");
   return (
     <React.Fragment>
       <NewTask onAddTask={fetch.taskAddHandler} />
