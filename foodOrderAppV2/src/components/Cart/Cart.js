@@ -34,15 +34,41 @@ const Cart = (props) => {
     </ul>
   );
   function handleSubmit(props){
+    props.preventDefault()
+    let customer = {}
+    console.log(props);
+    for (let index = 0; index < 4; index++) {
+      const target = props.target[index];
+      console.log(target.id);
+      console.log(target.value);
+      switch (target.id) {
+        case "fName":
+          customer.fName = target.value
+          break;
+          case "lName":
+          customer.lName = target.value
+            break;
+            case "email":
+          customer.email = target.value
+              break;
+              case "phone":
+          customer.phone = target.value
+          break;
+      
+        default:
+          break;
+      }
+      console.log(customer);
+    }
     async function postData(props){
       fetch("https://react-api-test-8bcb9-default-rtdb.europe-west1.firebasedatabase.app/orders.json", {
         method: "POST",
         body: JSON.stringify(props)
       })
     }
-    props.preventDefault()
-    postData(cartCtx.items)
-    console.log(cartCtx.items);
+    
+    postData({customer, order : {...cartCtx.items}})
+    console.log([customer, cartCtx.items]);
   }
   return (
     
